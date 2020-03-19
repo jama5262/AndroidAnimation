@@ -1,2 +1,3 @@
 rootProject.name='AndroidAnimationExample'
 include ':app'
+include ':android-animation'
