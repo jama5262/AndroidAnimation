@@ -2,6 +2,7 @@ package com.example.android_animation
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
+import android.os.Build
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +17,7 @@ class AndroidAnimation {
     private var defaultDuration: Long = 1000L
     private var defaultDelay: Long = 0L
     private var defaultEasing: Easings = Easings.LINEAR
+    private var totalObjectAnimatorDuration: Long = 0L
 
     fun targetViews(vararg v: View) {
         clearViews()
@@ -88,7 +90,26 @@ class AndroidAnimation {
                 setPropertyName(propertyName)
                 setFloatValues(*values)
             }
+            calculateTotalDuration(objectAnimator)
             objectAnimators.add(objectAnimator)
+        }
+    }
+
+    private fun calculateTotalDuration(objectAnimator: ObjectAnimator) {
+        val totalDuration = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            objectAnimator.totalDuration
+        } else {
+            objectAnimator.duration + objectAnimator.startDelay
+        }
+
+        if (totalObjectAnimatorDuration < totalDuration) {
+            totalObjectAnimatorDuration = totalDuration
+        }
+    }
+
+    fun thenPlay(delay: Long = 0L) {
+        if (defaultDelay < totalObjectAnimatorDuration) {
+            defaultDelay = totalObjectAnimatorDuration.plus(delay)
         }
     }
 
