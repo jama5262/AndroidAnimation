@@ -15,7 +15,7 @@ class AndroidAnimation {
     private var views = mutableListOf<View>()
     private var defaultDuration: Long = 1000L
     private var defaultDelay: Long = 0L
-    private var defaultEasing: ExternalEasing = ExternalEasing.LINEAR
+    private var defaultEasing: Easings = Easings.LINEAR
 
     fun targetViews(vararg v: View) {
         clearViews()
@@ -37,54 +37,54 @@ class AndroidAnimation {
         views = mutableListOf()
     }
 
-    fun x(vararg values: Float, dur: Long = defaultDuration, delay: Long = defaultDelay) {
-        createObjectAnimator("x", dur, delay, *values)
+    fun x(vararg values: Float, dur: Long = defaultDuration, delay: Long = defaultDelay, easing: Easings = defaultEasing) {
+        createObjectAnimator("x", dur, delay, easing, *values)
     }
 
-    fun y(vararg values: Float, dur: Long = defaultDuration, delay: Long = defaultDelay) {
-        createObjectAnimator("y", dur, delay, *values)
+    fun y(vararg values: Float, dur: Long = defaultDuration, delay: Long = defaultDelay, easing: Easings = defaultEasing) {
+        createObjectAnimator("y", dur, delay, easing, *values)
     }
 
-    fun translateX(vararg values: Float, dur: Long = defaultDuration, delay: Long = defaultDelay) {
-        createObjectAnimator("translationX", dur, delay, *values)
+    fun translateX(vararg values: Float, dur: Long = defaultDuration, delay: Long = defaultDelay, easing: Easings = defaultEasing) {
+        createObjectAnimator("translationX", dur, delay, easing, *values)
     }
 
-    fun translateY(vararg values: Float, dur: Long = defaultDuration, delay: Long = defaultDelay) {
-        createObjectAnimator("translationY", dur, delay, *values)
+    fun translateY(vararg values: Float, dur: Long = defaultDuration, delay: Long = defaultDelay, easing: Easings = defaultEasing) {
+        createObjectAnimator("translationY", dur, delay, easing, *values)
     }
 
-    fun rotateX(vararg values: Float, dur: Long = defaultDuration, delay: Long = defaultDelay) {
-        createObjectAnimator("rotationX", dur, delay, *values)
+    fun rotateX(vararg values: Float, dur: Long = defaultDuration, delay: Long = defaultDelay, easing: Easings = defaultEasing) {
+        createObjectAnimator("rotationX", dur, delay, easing, *values)
     }
 
-    fun rotateY(vararg values: Float, dur: Long = defaultDuration, delay: Long = defaultDelay) {
-        createObjectAnimator("rotationY", dur, delay, *values)
+    fun rotateY(vararg values: Float, dur: Long = defaultDuration, delay: Long = defaultDelay, easing: Easings = defaultEasing) {
+        createObjectAnimator("rotationY", dur, delay, easing, *values)
     }
 
-    fun rotate(vararg values: Float, dur: Long = defaultDuration, delay: Long = defaultDelay) {
-        createObjectAnimator("rotation", dur, delay, *values)
+    fun rotate(vararg values: Float, dur: Long = defaultDuration, delay: Long = defaultDelay, easing: Easings = defaultEasing) {
+        createObjectAnimator("rotation", dur, delay, easing, *values)
     }
 
-    fun scaleX(vararg values: Float, dur: Long = defaultDuration, delay: Long = defaultDelay) {
-        createObjectAnimator("scaleX ", dur, delay, *values)
+    fun scaleX(vararg values: Float, dur: Long = defaultDuration, delay: Long = defaultDelay, easing: Easings = defaultEasing) {
+        createObjectAnimator("scaleX ", dur, delay, easing, *values)
     }
 
-    fun scaleY(vararg values: Float, dur: Long = defaultDuration, delay: Long = defaultDelay) {
-        createObjectAnimator("scaleY", dur, delay, *values)
+    fun scaleY(vararg values: Float, dur: Long = defaultDuration, delay: Long = defaultDelay, easing: Easings = defaultEasing) {
+        createObjectAnimator("scaleY", dur, delay, easing, *values)
     }
 
-    fun alpha(vararg values: Float, dur: Long = defaultDuration, delay: Long = defaultDelay) {
-        createObjectAnimator("alpha", dur, delay, *values)
+    fun alpha(vararg values: Float, dur: Long = defaultDuration, delay: Long = defaultDelay, easing: Easings = defaultEasing) {
+        createObjectAnimator("alpha", dur, delay, easing, *values)
     }
 
-    private fun createObjectAnimator(propertyName: String, dur: Long, delay: Long, vararg values: Float) {
+    private fun createObjectAnimator(propertyName: String, dur: Long, delay: Long, easing: Easings, vararg values: Float) {
         views.forEach { view ->
             val objectAnimator = ObjectAnimator()
             objectAnimator.apply {
                 target = view
                 duration = dur
                 startDelay = delay
-                interpolator = Interpolators(defaultEasing)
+                interpolator = Interpolators(ExternalEasing.valueOf(easing.name))
                 setPropertyName(propertyName)
                 setFloatValues(*values)
             }
@@ -101,15 +101,8 @@ class AndroidAnimation {
     }
 
     fun easing(easing: Easings) {
-        defaultEasing = ExternalEasing.valueOf(easing.name)
+        defaultEasing = easing
     }
-
-//    private fun getEasing(easing: ExternalEasing): ExternalEasing {
-//        if (defaultEasing == ExternalEasing.LINEAR) {
-//            return ExternalEasing.LINEAR
-//        }
-//        return ExternalEasing.valueOf(easing.name)
-//    }
 
     fun start() {
         AnimatorSet().apply {

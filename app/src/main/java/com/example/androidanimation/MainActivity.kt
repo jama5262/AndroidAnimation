@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
                 translateX(0f, 700f, 0f)
                 targetChildViews(linearLayoutAnimate)
                 delay(2000)
-                translateY(0f, 700f, 0f)
+                rotate(0f, 700f, 0f)
                 start()
             }
         }
