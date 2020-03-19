@@ -1,6 +1,6 @@
-package com.example.android_animation
+package com.example.android_animation.enums
 
-enum class Easings {
+enum class Easing {
     LINEAR,
     SIN_IN,
     SIN_OUT,
