@@ -2,9 +2,9 @@ package com.example.androidanimation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import com.example.android_animation.AndroidAnimation
-import com.example.android_animation.Easings
+import com.example.android_animation.enums.Direction
+import com.example.android_animation.enums.Easing
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -19,9 +19,10 @@ class MainActivity : AppCompatActivity() {
                 translateX(0f, 700f, 0f)
                 thenPlay()
                 duration(5000)
-                easing(Easings.QUINT_IN_OUT)
+                easing(Easing.QUINT_IN_OUT)
                 targetChildViews(linearLayoutAnimate, stagger = 200)
                 rotate(0f, 700f, 0f)
+                looping(true)
                 start()
             }
         }
