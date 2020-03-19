@@ -15,6 +15,7 @@ class MainActivity : AppCompatActivity() {
             AndroidAnimation().apply {
                 targetViews(buttonAnimate1, buttonAnimate2)
                 translateX(0f, 700f, 0f)
+                duration(5000)
                 targetChildViews(linearLayoutAnimate)
                 translateY(0f, 700f, 0f)
                 start()

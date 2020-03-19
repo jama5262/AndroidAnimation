@@ -10,6 +10,7 @@ class AndroidAnimation {
 
     private var objectAnimators = mutableListOf<ObjectAnimator>()
     private var views = mutableListOf<View>()
+    private var defaultDuration: Long = 1000L
 
     fun targetViews(vararg v: View) {
         clearViews()
@@ -31,56 +32,61 @@ class AndroidAnimation {
         views = mutableListOf()
     }
 
-    fun x(vararg values: Float) {
-        createObjectAnimator("x", *values)
+    fun x(vararg values: Float, dur: Long = defaultDuration) {
+        createObjectAnimator("x", dur, *values)
     }
 
-    fun y(vararg values: Float) {
-        createObjectAnimator("y", *values)
+    fun y(vararg values: Float, dur: Long = defaultDuration) {
+        createObjectAnimator("y", dur, *values)
     }
 
-    fun translateX(vararg values: Float) {
-        createObjectAnimator("translationX", *values)
+    fun translateX(vararg values: Float, dur: Long = defaultDuration) {
+        createObjectAnimator("translationX", dur, *values)
     }
 
-    fun translateY(vararg values: Float) {
-        createObjectAnimator("translationY", *values)
+    fun translateY(vararg values: Float, dur: Long = defaultDuration) {
+        createObjectAnimator("translationY", dur, *values)
     }
 
-    fun rotateX(vararg values: Float) {
-        createObjectAnimator("rotationX", *values)
+    fun rotateX(vararg values: Float, dur: Long = defaultDuration) {
+        createObjectAnimator("rotationX", dur, *values)
     }
 
-    fun rotateY(vararg values: Float) {
-        createObjectAnimator("rotationY", *values)
+    fun rotateY(vararg values: Float, dur: Long = defaultDuration) {
+        createObjectAnimator("rotationY", dur, *values)
     }
 
-    fun rotate(vararg values: Float) {
-        createObjectAnimator("rotation", *values)
+    fun rotate(vararg values: Float, dur: Long = defaultDuration) {
+        createObjectAnimator("rotation", dur, *values)
     }
 
-    fun scaleX(vararg values: Float) {
-        createObjectAnimator("scaleX ", *values)
+    fun scaleX(vararg values: Float, dur: Long = defaultDuration) {
+        createObjectAnimator("scaleX ", dur, *values)
     }
 
-    fun scaleY(vararg values: Float) {
-        createObjectAnimator("scaleY", *values)
+    fun scaleY(vararg values: Float, dur: Long = defaultDuration) {
+        createObjectAnimator("scaleY", dur, *values)
     }
 
-    fun alpha(vararg values: Float) {
-        createObjectAnimator("alpha", *values)
+    fun alpha(vararg values: Float, dur: Long = defaultDuration) {
+        createObjectAnimator("alpha", dur, *values)
     }
 
-    private fun createObjectAnimator(propertyName: String, vararg values: Float) {
+    private fun createObjectAnimator(propertyName: String, dur: Long, vararg values: Float) {
         views.forEach { view ->
             val objectAnimator = ObjectAnimator()
             objectAnimator.apply {
                 target = view
+                duration = dur
                 setPropertyName(propertyName)
                 setFloatValues(*values)
             }
             objectAnimators.add(objectAnimator)
         }
+    }
+
+    fun duration(dur: Long) {
+        defaultDuration = dur
     }
 
     fun start() {
