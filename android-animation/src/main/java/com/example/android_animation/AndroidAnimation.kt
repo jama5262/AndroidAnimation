@@ -3,7 +3,6 @@ package com.example.android_animation
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.os.Build
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.children
@@ -17,16 +16,19 @@ class AndroidAnimation {
     private var defaultDuration: Long = 1000L
     private var defaultDelay: Long = 0L
     private var defaultEasing: Easings = Easings.LINEAR
+    private var defaultStagger: Long = 0L
     private var totalObjectAnimatorDuration: Long = 0L
 
-    fun targetViews(vararg v: View) {
+    fun targetViews(vararg v: View, stagger: Long = 0L) {
+        defaultStagger = stagger
         clearViews()
         v.forEach { view ->
             views.add(view)
         }
     }
 
-    fun targetChildViews(vararg vg: ViewGroup) {
+    fun targetChildViews(vararg vg: ViewGroup, stagger: Long = 0L) {
+        defaultStagger = stagger
         clearViews()
         vg.forEach { viewGroup ->
             viewGroup.children.forEach { view ->
@@ -80,22 +82,29 @@ class AndroidAnimation {
     }
 
     private fun createObjectAnimator(propertyName: String, dur: Long, delay: Long, easing: Easings, vararg values: Float) {
-        views.forEach { view ->
+        views.forEachIndexed { index, view ->
             val objectAnimator = ObjectAnimator()
             objectAnimator.apply {
                 target = view
                 duration = dur
-                startDelay = delay
+                startDelay = calculateStaggering(delay, index)
                 interpolator = Interpolators(ExternalEasing.valueOf(easing.name))
                 setPropertyName(propertyName)
                 setFloatValues(*values)
             }
-            calculateTotalDuration(objectAnimator)
+            getTotalDuration(objectAnimator)
             objectAnimators.add(objectAnimator)
         }
     }
 
-    private fun calculateTotalDuration(objectAnimator: ObjectAnimator) {
+    private fun calculateStaggering(delay: Long, index: Int): Long {
+        if (defaultStagger == 0L) {
+            return delay
+        }
+        return (defaultStagger * (index)) + delay
+    }
+
+    private fun getTotalDuration(objectAnimator: ObjectAnimator) {
         val totalDuration = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             objectAnimator.totalDuration
         } else {
