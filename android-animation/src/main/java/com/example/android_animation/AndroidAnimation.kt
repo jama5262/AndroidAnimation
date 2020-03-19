@@ -2,10 +2,11 @@ package com.example.android_animation
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.children
-import com.ramijemli.easings.Easings
+import com.ramijemli.easings.Easings as ExternalEasing
 import com.ramijemli.easings.Interpolators
 
 class AndroidAnimation {
@@ -14,6 +15,7 @@ class AndroidAnimation {
     private var views = mutableListOf<View>()
     private var defaultDuration: Long = 1000L
     private var defaultDelay: Long = 0L
+    private var defaultEasing: ExternalEasing = ExternalEasing.LINEAR
 
     fun targetViews(vararg v: View) {
         clearViews()
@@ -82,7 +84,7 @@ class AndroidAnimation {
                 target = view
                 duration = dur
                 startDelay = delay
-                interpolator = Interpolators(Easings.BACK_OUT)
+                interpolator = Interpolators(defaultEasing)
                 setPropertyName(propertyName)
                 setFloatValues(*values)
             }
@@ -98,7 +100,16 @@ class AndroidAnimation {
         defaultDelay = delay
     }
 
-//    private fun
+    fun easing(easing: Easings) {
+        defaultEasing = ExternalEasing.valueOf(easing.name)
+    }
+
+//    private fun getEasing(easing: ExternalEasing): ExternalEasing {
+//        if (defaultEasing == ExternalEasing.LINEAR) {
+//            return ExternalEasing.LINEAR
+//        }
+//        return ExternalEasing.valueOf(easing.name)
+//    }
 
     fun start() {
         AnimatorSet().apply {
