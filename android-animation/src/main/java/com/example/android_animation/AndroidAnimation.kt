@@ -1,5 +1,6 @@
 package com.example.android_animation
 
+import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.view.View
 import android.view.ViewGroup
@@ -79,6 +80,13 @@ class AndroidAnimation {
                 setFloatValues(*values)
             }
             objectAnimators.add(objectAnimator)
+        }
+    }
+
+    fun start() {
+        AnimatorSet().apply {
+            playTogether(objectAnimators.toList())
+            start()
         }
     }
 
