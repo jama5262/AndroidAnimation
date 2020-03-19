@@ -5,6 +5,8 @@ import android.animation.ObjectAnimator
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.children
+import com.ramijemli.easings.Easings
+import com.ramijemli.easings.Interpolators
 
 class AndroidAnimation {
 
@@ -80,6 +82,7 @@ class AndroidAnimation {
                 target = view
                 duration = dur
                 startDelay = delay
+                interpolator = Interpolators(Easings.BACK_OUT)
                 setPropertyName(propertyName)
                 setFloatValues(*values)
             }
@@ -94,6 +97,8 @@ class AndroidAnimation {
     fun delay(delay: Long) {
         defaultDelay = delay
     }
+
+//    private fun
 
     fun start() {
         AnimatorSet().apply {

@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
 
         button.setOnClickListener {
             AndroidAnimation().apply {
-                delay(1000)
+                duration(5000)
                 targetViews(buttonAnimate1, buttonAnimate2)
                 translateX(0f, 700f, 0f)
                 targetChildViews(linearLayoutAnimate)
