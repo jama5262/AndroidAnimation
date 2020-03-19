@@ -2,10 +2,16 @@ package com.example.android_animation
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
+import android.animation.ValueAnimator.REVERSE
 import android.os.Build
+import android.text.BoringLayout
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
+import androidx.core.animation.doOnEnd
 import androidx.core.view.children
+import com.example.android_animation.enums.Direction
 import com.example.android_animation.enums.Easing
 import com.ramijemli.easings.Easings as ExternalEasing
 import com.ramijemli.easings.Interpolators
@@ -17,6 +23,8 @@ class AndroidAnimation {
     private var defaultDuration: Long = 1000L
     private var defaultDelay: Long = 0L
     private var defaultEasing: Easing = Easing.LINEAR
+    private var defaultDirection: Direction = Direction.NORMAL
+    private var isLooping: Boolean = false
     private var defaultStagger: Long = 0L
     private var totalObjectAnimatorDuration: Long = 0L
 
@@ -135,10 +143,22 @@ class AndroidAnimation {
         defaultEasing = easing
     }
 
+    fun direction(direction: Direction) {
+        defaultDirection = direction
+    }
+
+    private fun animationDirection(animatorSet: AnimatorSet) {
+        when(defaultDirection) {
+            Direction.NORMAL -> animatorSet.start()
+            Direction.REVERSE -> animatorSet.reverse()
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
     fun start() {
         AnimatorSet().apply {
             playTogether(objectAnimators.toList())
-            start()
+            animationDirection(this)
         }
     }
 
