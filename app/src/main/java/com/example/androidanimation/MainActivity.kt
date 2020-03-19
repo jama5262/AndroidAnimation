@@ -2,6 +2,7 @@ package com.example.androidanimation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.android_animation.AndroidAnimation
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -11,7 +12,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         button.setOnClickListener {
-
+            AndroidAnimation().apply {
+                targetViews(buttonAnimate1, buttonAnimate2)
+                targetChildViews(linearLayoutAnimate)
+            }
         }
 
     }
