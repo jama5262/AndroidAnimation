@@ -17,16 +17,17 @@ class AndroidAnimation {
     private var defaultDuration: Long = 1000L
     private var defaultDelay: Long = 0L
     private var defaultEasing: Easings = Easings.LINEAR
+    private var defaultStagger: Long = 0L
     private var totalObjectAnimatorDuration: Long = 0L
 
-    fun targetViews(vararg v: View) {
+    fun targetViews(vararg v: View, stagger: Long = defaultStagger) {
         clearViews()
         v.forEach { view ->
             views.add(view)
         }
     }
 
-    fun targetChildViews(vararg vg: ViewGroup) {
+    fun targetChildViews(vararg vg: ViewGroup, stagger: Long = defaultStagger) {
         clearViews()
         vg.forEach { viewGroup ->
             viewGroup.children.forEach { view ->
