@@ -13,7 +13,8 @@ class MainActivity : AppCompatActivity() {
 
         button.setOnClickListener {
             AndroidAnimation().apply {
-                targetView(buttonAnimate1, buttonAnimate2)
+                targetViews(buttonAnimate1, buttonAnimate2)
+                targetChildViews(linearLayoutAnimate)
             }
         }
 
