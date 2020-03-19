@@ -31,43 +31,55 @@ class AndroidAnimation {
     }
 
     fun x(vararg values: Float) {
-
+        createObjectAnimator("x", *values)
     }
 
     fun y(vararg values: Float) {
-
+        createObjectAnimator("y", *values)
     }
 
     fun translateX(vararg values: Float) {
-
+        createObjectAnimator("translationX", *values)
     }
 
     fun translateY(vararg values: Float) {
-
+        createObjectAnimator("translationY", *values)
     }
 
     fun rotateX(vararg values: Float) {
-
+        createObjectAnimator("rotationX", *values)
     }
 
     fun rotateY(vararg values: Float) {
-
+        createObjectAnimator("rotationY", *values)
     }
 
     fun rotate(vararg values: Float) {
-
+        createObjectAnimator("rotation", *values)
     }
 
     fun scaleX(vararg values: Float) {
-
+        createObjectAnimator("scaleX ", *values)
     }
 
     fun scaleY(vararg values: Float) {
-
+        createObjectAnimator("scaleY", *values)
     }
 
     fun alpha(vararg values: Float) {
+        createObjectAnimator("alpha", *values)
+    }
 
+    private fun createObjectAnimator(propertyName: String, vararg values: Float) {
+        views.forEach { view ->
+            val objectAnimator = ObjectAnimator()
+            objectAnimator.apply {
+                target = view
+                setPropertyName(propertyName)
+                setFloatValues(*values)
+            }
+            objectAnimators.add(objectAnimator)
+        }
     }
 
 }
