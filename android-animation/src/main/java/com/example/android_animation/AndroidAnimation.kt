@@ -30,4 +30,44 @@ class AndroidAnimation {
         views = mutableListOf()
     }
 
+    fun x(vararg values: Float) {
+
+    }
+
+    fun y(vararg values: Float) {
+
+    }
+
+    fun translateX(vararg values: Float) {
+
+    }
+
+    fun translateY(vararg values: Float) {
+
+    }
+
+    fun rotateX(vararg values: Float) {
+
+    }
+
+    fun rotateY(vararg values: Float) {
+
+    }
+
+    fun rotate(vararg values: Float) {
+
+    }
+
+    fun scaleX(vararg values: Float) {
+
+    }
+
+    fun scaleY(vararg values: Float) {
+
+    }
+
+    fun alpha(vararg values: Float) {
+
+    }
+
 }
