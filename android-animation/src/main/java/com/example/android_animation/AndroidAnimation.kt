@@ -92,6 +92,10 @@ class AndroidAnimation {
         }
     }
 
+    fun thenPlay(delay: Long) {
+
+    }
+
     fun duration(dur: Long) {
         defaultDuration = dur
     }
