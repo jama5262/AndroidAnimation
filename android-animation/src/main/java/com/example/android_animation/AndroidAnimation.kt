@@ -24,9 +24,9 @@ class AndroidAnimation {
     private var defaultDelay: Long = 0L
     private var defaultEasing: Easing = Easing.LINEAR
     private var defaultDirection: Direction = Direction.NORMAL
-    private var isLooping: Boolean = false
     private var defaultStagger: Long = 0L
     private var totalObjectAnimatorDuration: Long = 0L
+    private var onAnimationEnd: (() -> Unit)? = null
 
     fun targetViews(vararg v: View, stagger: Long = 0L) {
         defaultStagger = stagger
@@ -79,7 +79,7 @@ class AndroidAnimation {
     }
 
     fun scaleX(vararg values: Float, dur: Long = defaultDuration, delay: Long = defaultDelay, easing: Easing = defaultEasing) {
-        createObjectAnimator("scaleX ", dur, delay, easing, *values)
+        createObjectAnimator("scaleX", dur, delay, easing, *values)
     }
 
     fun scaleY(vararg values: Float, dur: Long = defaultDuration, delay: Long = defaultDelay, easing: Easing = defaultEasing) {
@@ -154,11 +154,19 @@ class AndroidAnimation {
         }
     }
 
+    fun onAnimationEnd(action: () -> Unit) {
+        onAnimationEnd = action
+    }
+
     @RequiresApi(Build.VERSION_CODES.O)
     fun start() {
+
         AnimatorSet().apply {
             playTogether(objectAnimators.toList())
             animationDirection(this)
+            doOnEnd {
+                onAnimationEnd?.invoke()
+            }
         }
     }
 

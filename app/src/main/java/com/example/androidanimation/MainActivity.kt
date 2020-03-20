@@ -2,8 +2,8 @@ package com.example.androidanimation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.example.android_animation.AndroidAnimation
-import com.example.android_animation.enums.Direction
 import com.example.android_animation.enums.Easing
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -22,7 +22,10 @@ class MainActivity : AppCompatActivity() {
                 easing(Easing.QUINT_IN_OUT)
                 targetChildViews(linearLayoutAnimate, stagger = 200)
                 rotate(0f, 700f, 0f)
-                looping(true)
+                onAnimationEnd {
+                    Toast.makeText(applicationContext, "Animation has finished", Toast.LENGTH_LONG)
+                        .show()
+                }
                 start()
             }
         }
