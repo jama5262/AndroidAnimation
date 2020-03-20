@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.core.animation.doOnEnd
+import androidx.core.animation.doOnStart
 import androidx.core.view.children
 import com.example.android_animation.enums.Direction
 import com.example.android_animation.enums.Easing
@@ -27,6 +28,7 @@ class AndroidAnimation {
     private var defaultStagger: Long = 0L
     private var totalObjectAnimatorDuration: Long = 0L
     private var onAnimationEnd: (() -> Unit)? = null
+    private var onAnimationStart: (() -> Unit)? = null
 
     fun targetViews(vararg v: View, stagger: Long = 0L) {
         defaultStagger = stagger
@@ -154,13 +156,17 @@ class AndroidAnimation {
         }
     }
 
+    fun onAnimationStart(action: () -> Unit) {
+        onAnimationStart = action
+    }
+
     fun onAnimationEnd(action: () -> Unit) {
         onAnimationEnd = action
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun start() {
-
+        onAnimationStart?.invoke()
         AnimatorSet().apply {
             playTogether(objectAnimators.toList())
             animationDirection(this)

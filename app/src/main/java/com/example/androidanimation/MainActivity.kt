@@ -22,6 +22,10 @@ class MainActivity : AppCompatActivity() {
                 easing(Easing.QUINT_IN_OUT)
                 targetChildViews(linearLayoutAnimate, stagger = 200)
                 rotate(0f, 700f, 0f)
+                onAnimationStart {
+                    Toast.makeText(applicationContext, "Animation has started", Toast.LENGTH_LONG)
+                        .show()
+                }
                 onAnimationEnd {
                     Toast.makeText(applicationContext, "Animation has finished", Toast.LENGTH_LONG)
                         .show()
