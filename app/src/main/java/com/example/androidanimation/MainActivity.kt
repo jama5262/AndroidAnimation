@@ -15,24 +15,13 @@ class MainActivity : AppCompatActivity() {
 
         button.setOnClickListener {
             AndroidAnimation().apply {
-                targetViews(buttonAnimate1, buttonAnimate2, stagger = 500)
+                targetChildViews(linearLayoutAnimate, stagger = 1000)
+                delay = 500
                 translateX(0f, 700f, 0f)
-                thenPlay()
-                duration(5000)
-                easing(Easing.QUINT_IN_OUT)
-                targetChildViews(linearLayoutAnimate, stagger = 200)
-                rotate(0f, 700f, 0f)
-                onAnimationStart {
-                    Toast.makeText(applicationContext, "Animation has started", Toast.LENGTH_LONG)
-                        .show()
-                }
-                onAnimationEnd {
-                    Toast.makeText(applicationContext, "Animation has finished", Toast.LENGTH_LONG)
-                        .show()
-                }
+                thenPlay(2000)
+                translateY(0f, 700f, 0f, delay = 400)
                 start()
             }
         }
-
     }
 }
