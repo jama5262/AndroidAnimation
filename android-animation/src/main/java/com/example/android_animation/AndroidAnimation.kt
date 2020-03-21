@@ -17,9 +17,9 @@ class AndroidAnimation {
 
     private var objectAnimators = mutableListOf<ObjectAnimator>()
     private var views = mutableListOf<View>()
-    var duration: Long = 1000L
+    var duration: Long = 2000L
     var delay: Long = 0L
-    var easing: Easing = Easing.LINEAR
+    var easing: Easing = Easing.ELASTIC_OUT
     var direction: Direction = Direction.NORMAL
     var loop: Boolean = false
     private var defaultStagger: Long = 0L
