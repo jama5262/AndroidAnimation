@@ -5,6 +5,12 @@
 
 An android library for easy and simple view animations
 
+# Table of content
+- [Installation](#installation)
+- [Usage](#usage)
+- [Support](#support)
+- [License](#license)
+
 ## Installation
 
 Current Version: [![](https://jitpack.io/v/jama5262/AndroidAnimation.svg)](https://jitpack.io/#jama5262/AndroidAnimation)
@@ -159,7 +165,7 @@ AndroidAnimation().apply {
 }
 ```
 
-**In terms of priority, the duration parameter overides the duration property**
+**In terms of priority, the duration parameter overides the [duration](#duration) property**
 
 
 ### Duration, Delay and Easing
@@ -209,11 +215,11 @@ Delaying different targets at different times. See example below
 
 ```kotlin
 AndroidAnimation().apply {
-    delay = 1000 // Below target view will have a duration of 1 sec
+    delay = 1000 // Below target view will have a delay of 1 sec
     targetViews(view1)
     translateX(0f, 700f)
     translateY(0f, 700f)
-    delay = 3000 // Below target views will have a duration of 3 sec
+    delay = 3000 // Below target views will have a delay of 3 sec
     targetViews(view2)
     translateX(0f, 700f)
     rotate(0f, 360f)
