@@ -16,7 +16,14 @@ class MainActivity : AppCompatActivity() {
         button.setOnClickListener {
             AndroidAnimation().apply {
                 targetViews(buttonAnimate1)
+                targetChildViews()
                 translateX(0f, 700f)
+                onAnimationEnd {
+
+                }
+                onAnimationStart {
+
+                }
                 start()
             }
         }
