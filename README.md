@@ -1,13 +1,13 @@
 # AndroidAnimation
 
-[![](https://jitpack.io/v/jama5262/CarouselView.svg)](https://jitpack.io/#jama5262/CarouselView)
+[![](https://jitpack.io/v/jama5262/AndroidAnimation.svg)](https://jitpack.io/#jama5262/AndroidAnimation)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 An android library for easy and simple view animations
 
 ## Installation
 
-Current Version: [![](https://jitpack.io/v/jama5262/CarouselView.svg)](https://jitpack.io/#jama5262/CarouselView)
+Current Version: [![](https://jitpack.io/v/jama5262/AndroidAnimation.svg)](https://jitpack.io/#jama5262/AndroidAnimation)
 
 #### Gradle
 
@@ -24,7 +24,7 @@ allprojects {
 
 ```
 dependencies {
-    implementation 'com.github.jama5262:CarouselView:1.1.0'
+    implementation 'com.github.jama5262:AndroidAnimation:0.1.0'
 }
 ```
 
@@ -42,8 +42,8 @@ dependencies {
 ```
 <dependency>
     <groupId>com.github.jama5262</groupId>
-	<artifactId>CarouselView</artifactId>
-    <version>1.1.0</version>
+	<artifactId>AndroidAnimation</artifactId>
+    <version>0.1.0</version>
 </dependency>
 ```
 
@@ -56,8 +56,8 @@ Great the project has been setup 👍
 These are views that are to be animated. Simply pass a view or multiple views to animate
 
 There are of two types
-- targetViews() - takes in views e.g buttons
-- targetChildViews() - takes in viewgroups e.g linearlayouts. Used to animation child views within the viewgroups
+- **targetViews()** - takes in views e.g buttons
+- **targetChildViews()** - takes in viewgroups e.g linearlayouts. Used to animation child views within the viewgroups
 
 Below is an example to move a view along the x axis
 
@@ -140,13 +140,13 @@ AndroidAnimation().apply {
     rotate(0f, 360f)
     start()
 }
-
+```
 
 ### Property Animations
 
 This library for now supports the following properties
 
-`translateX, translateY, rotate, rotateX, rotateY, scaleX, scaleY, alpha`
+`x, y, translateX, translateY, rotate, rotateX, rotateY, scaleX, scaleY, alpha`
 
 These properties takes in vararg values, duration, delay and eaing as parameters. See example below
 
@@ -159,7 +159,7 @@ AndroidAnimation().apply {
 }
 ```
 
-**In terms of priority, the duration parameter overides the duration property will follow**
+**In terms of priority, the duration parameter overides the duration property**
 
 
 ### Duration, Delay and Easing
@@ -298,5 +298,37 @@ AndroidAnimation().apply {
     }
     start()
 }
+```
 
+## Support
+
+Reach out to me at one of the following places!
+
+- Email at jama3137@gmail.com
+- Twitter [timedjama5262](https://twitter.com/timedjama5262)
+
+## License
+
+```
+MIT License
+
+Copyright (c) 2019 Jama Mohamed
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 ```
