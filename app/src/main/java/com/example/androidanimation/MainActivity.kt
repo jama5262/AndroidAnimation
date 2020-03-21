@@ -15,11 +15,15 @@ class MainActivity : AppCompatActivity() {
 
         button.setOnClickListener {
             AndroidAnimation().apply {
-                targetChildViews(linearLayoutAnimate, stagger = 1000)
-                delay = 500
-                translateX(0f, 700f, 0f)
-                thenPlay(2000)
-                translateY(0f, 700f, 0f, delay = 400)
+                targetViews(buttonAnimate1)
+                targetChildViews()
+                translateX(0f, 700f)
+                onAnimationEnd {
+
+                }
+                onAnimationStart {
+
+                }
                 start()
             }
         }
