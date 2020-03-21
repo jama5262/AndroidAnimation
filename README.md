@@ -154,7 +154,7 @@ This library for now supports the following properties
 
 `x, y, translateX, translateY, rotate, rotateX, rotateY, scaleX, scaleY, alpha`
 
-These properties takes in vararg values, duration, delay and eaing as parameters. See example below
+These properties takes in `vararg values, duration, delay and easing` as parameters. See example below
 
 ```kotlin
 AndroidAnimation().apply {
