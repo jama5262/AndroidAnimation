@@ -15,9 +15,10 @@ class MainActivity : AppCompatActivity() {
 
         button.setOnClickListener {
             AndroidAnimation().apply {
-                targetViews(buttonAnimate1)
-                targetChildViews()
-                translateX(0f, 700f)
+                targetViews(buttonAnimate1, buttonAnimate2, buttonAnimate3, stagger = 1000, reverse = true)
+                translateY(0f, 100f)
+                targetChildViews(linearLayoutAnimate, stagger = 1000, reverse = true)
+                translateY(0f, 100f)
                 onAnimationEnd {
 
                 }
