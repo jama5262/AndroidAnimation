@@ -30,7 +30,7 @@ allprojects {
 
 ```
 dependencies {
-    implementation 'com.github.jama5262:AndroidAnimation:0.1.0'
+    implementation 'com.github.jama5262:AndroidAnimation:0.2.0'
 }
 ```
 
@@ -49,7 +49,7 @@ dependencies {
 <dependency>
     <groupId>com.github.jama5262</groupId>
 	<artifactId>AndroidAnimation</artifactId>
-    <version>0.1.0</version>
+    <version>0.2.0</version>
 </dependency>
 ```
 
@@ -279,6 +279,17 @@ You can perform staggering by adding the `stagger` parameter to the target funct
 ```kotlin
 AndroidAnimation().apply {
     targetViews(view1, view2, view3, stagger = 200)
+    translateX(0f, 700f)
+    translateY(0f, 700f)
+    start()
+}
+```
+
+You can also reverse a stagger animation, by passing the reverse parameter to true. See example below
+
+```kotlin
+AndroidAnimation().apply {
+    targetViews(view1, view2, view3, stagger = 200, reverse = true)
     translateX(0f, 700f)
     translateY(0f, 700f)
     start()

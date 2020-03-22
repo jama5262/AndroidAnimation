@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.core.animation.doOnEnd
 import androidx.core.view.children
-import com.example.android_animation.enums.Direction
 import com.example.android_animation.enums.Easing
 import com.ramijemli.easings.Easings as ExternalEasing
 import com.ramijemli.easings.Interpolators
@@ -20,26 +19,27 @@ class AndroidAnimation {
     var duration: Long = 2000L
     var delay: Long = 0L
     var easing: Easing = Easing.ELASTIC_OUT
-    var direction: Direction = Direction.NORMAL
     var loop: Boolean = false
     private var defaultStagger: Long = 0L
     private var totalObjectAnimatorDuration: Long = 0L
     private var onAnimationEnd: (() -> Unit)? = null
     private var onAnimationStart: (() -> Unit)? = null
 
-    fun targetViews(vararg v: View, stagger: Long = 0L) {
+    fun targetViews(vararg v: View, stagger: Long = 0L, reverse: Boolean = false) {
         defaultStagger = stagger
         clearViews()
-        v.forEach { view ->
+        val targetViews = if (reverse) v.reversed() else v.toList()
+        targetViews.forEach { view ->
             views.add(view)
         }
     }
 
-    fun targetChildViews(vararg vg: ViewGroup, stagger: Long = 0L) {
+    fun targetChildViews(vararg vg: ViewGroup, stagger: Long = 0L, reverse: Boolean = false) {
         defaultStagger = stagger
         clearViews()
         vg.forEach { viewGroup ->
-            viewGroup.children.forEach { view ->
+            val targetViews = if (reverse) viewGroup.children.asIterable().reversed() else viewGroup.children.toList()
+            targetViews.forEach { view ->
                 views.add(view)
             }
         }
@@ -130,13 +130,6 @@ class AndroidAnimation {
         }
     }
 
-    private fun animationDirection(animatorSet: AnimatorSet) {
-        when(direction) {
-            Direction.NORMAL -> animatorSet.start()
-            Direction.REVERSE -> animatorSet.reverse()
-        }
-    }
-
     fun onAnimationStart(action: () -> Unit) {
         onAnimationStart = action
     }
@@ -149,12 +142,11 @@ class AndroidAnimation {
         if (loop) animatorSet.start()
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     fun start() {
         onAnimationStart?.invoke()
         AnimatorSet().apply {
             playTogether(objectAnimators.toList())
-            animationDirection(this)
+            start()
             doOnEnd {
                 loopAnimation(this)
                 onAnimationEnd?.invoke()
