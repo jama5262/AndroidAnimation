@@ -5,6 +5,14 @@
 
 An android library for easy and simple view animations
 
+# Example
+
+Below is an exmple of the droidconKE app using thie library for splash screen animation
+
+Splash screen animation |
+------------ | 
+<img src="https://user-images.githubusercontent.com/18502400/77252563-a68d5b80-6c65-11ea-8982-0fbdfe988a93.gif" height="500px">
+
 # Table of content
 - [Installation](#installation)
 - [Usage](#usage)
