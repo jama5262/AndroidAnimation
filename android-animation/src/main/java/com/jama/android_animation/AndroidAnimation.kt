@@ -9,7 +9,6 @@ import androidx.core.animation.doOnStart
 import androidx.core.animation.doOnPause
 import androidx.core.animation.doOnResume
 import androidx.core.animation.doOnCancel
-import androidx.core.animation.doOnRepeat
 import androidx.core.animation.doOnEnd
 import androidx.core.view.children
 import com.jama.android_animation.enums.Easing

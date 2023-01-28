@@ -74,7 +74,7 @@ val animation = androidAnimation {
 animation.start()
 ```
 
-You can also pass in multiple view since the target takes in a list
+You can also pass in multiple views since the target takes in a list
 
 ```kotlin
 val animation = androidAnimation {
@@ -94,7 +94,7 @@ val animation = androidAnimation {
 animation.start()
 ```
 
-You can also passing in multiple targets for different property animations. Doing this will make all the targeted views to play together.
+You can also pass in multiple targets for different property animations. Doing this will make all the targeted views to play together.
 
 ```kotlin
 val animation = androidAnimation {
@@ -315,7 +315,7 @@ You can perform different actions to an animations. See below
 
 ```kotlin
 val animation = androidAnimation {
-    ...
+    // ...
 }
 
 animation.start() // Starts the animation
@@ -342,7 +342,7 @@ Below is how you can use it
 
 ```kotlin
 val animation = androidAnimation {
-    targetViews(views = listOf(buttonAnimate1))
+    targetViews(views = listOf(view1))
     translateX(values = listOf(0f, 700f))
     
     onAnimationStarted { 
