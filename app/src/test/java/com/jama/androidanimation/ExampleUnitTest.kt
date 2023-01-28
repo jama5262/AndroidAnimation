@@ -1,4 +1,4 @@
-package com.example.android_animation
+package com.jama.androidanimation
 
 import org.junit.Test
 

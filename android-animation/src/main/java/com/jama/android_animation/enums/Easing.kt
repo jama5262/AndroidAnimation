@@ -1,4 +1,4 @@
-package com.example.android_animation.enums
+package com.jama.android_animation.enums
 
 enum class Easing {
     LINEAR,
