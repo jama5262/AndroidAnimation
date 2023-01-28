@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
         val animation = androidAnimation {
             duration = 5000
             easing = Easing.LINEAR
-            targetViews(views = listOf(buttonAnimate1))
+            targetViews(views = listOf(buttonAnimate1), reverse = true)
             translateX(values = listOf(100f))
             thenPlay()
             easing = Easing.EXP_OUT
@@ -25,7 +25,6 @@ class MainActivity : AppCompatActivity() {
             onAnimationPaused { println("Animation is paused") }
             onAnimationResumed { println("Animation is resume") }
             onAnimationCanceled { println("Animation is canceled") }
-            onAnimationRepeated { println("Animation is repeated") }
             onAnimationEnded { println("Animations has ended") }
         }
 

@@ -32,7 +32,6 @@ class AndroidAnimation {
     private var onAnimationStarted: (() -> Unit)? = null
     private var onAnimationPaused: (() -> Unit)? = null
     private var onAnimationResumed: (() -> Unit)? = null
-    private var onAnimationRepeated: (() -> Unit)? = null
     private var onAnimationCanceled: (() -> Unit)? = null
     private var onAnimationEnded: (() -> Unit)? = null
 
@@ -244,10 +243,6 @@ class AndroidAnimation {
         onAnimationResumed = action
     }
 
-    fun onAnimationRepeated(action: () -> Unit) {
-        onAnimationRepeated = action
-    }
-
     fun onAnimationCanceled(action: () -> Unit) {
         onAnimationCanceled = action
     }
@@ -267,7 +262,6 @@ class AndroidAnimation {
             doOnStart { onAnimationStarted?.invoke() }
             doOnPause { onAnimationPaused?.invoke() }
             doOnResume { onAnimationResumed?.invoke() }
-            doOnRepeat { onAnimationRepeated?.invoke() }
             doOnCancel { onAnimationCanceled?.invoke() }
             doOnEnd {
                 loopAnimation(this)

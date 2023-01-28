@@ -11,7 +11,7 @@ Below is an [example](https://github.com/droidconKE/droidconKE2020App/pull/55) o
 
 Splash screen animation |
 ------------ | 
-<img src="https://user-images.githubusercontent.com/18502400/77252563-a68d5b80-6c65-11ea-8982-0fbdfe988a93.gif" height="500px">
+<img src="https://user-images.githubusercontent.com/18502400/77252563-a68d5b80-6c65-11ea-8982-0fbdfe988a93.gif" height="500px"> |
 
 # Table of content
 - [Installation](#installation)
@@ -38,27 +38,8 @@ allprojects {
 
 ```
 dependencies {
-    implementation 'com.github.jama5262:AndroidAnimation:0.2.0'
+    implementation 'com.github.jama5262:AndroidAnimation:<version>'
 }
-```
-
-#### Maven
-
-```
-<repositories>
-    <repository>
-        <id>jitpack.io</id>
-        <url>https://jitpack.io</url>
-    </repository>
-</repositories>
-```
-
-```
-<dependency>
-    <groupId>com.github.jama5262</groupId>
-	<artifactId>AndroidAnimation</artifactId>
-    <version>0.2.0</version>
-</dependency>
 ```
 
 Great the project has been setup 👍
@@ -67,7 +48,7 @@ Great the project has been setup 👍
 
 ### Targets
 
-These are views that are to be animated. Simply pass a view or multiple views to animate
+To animate, a view or multiple views, you can use the following target functions
 
 There are of two types
 - **targetViews()** - takes in views e.g buttons
@@ -76,163 +57,184 @@ There are of two types
 Below is an example to move a view along the x axis
 
 ```kotlin
-AndroidAnimation().apply {
-    targetViews(view1)
-    translateX(0f, 700f)
-    start()
+val animation = androidAnimation {
+    targetViews(views = listOf(view1))
+    translateX(values = listOf(0f, 700f))
 }
 
-// Or passing a viewgroup to animate its childern
+animation.start()
 
-AndroidAnimation().apply {
-    targetChildViews(viewGroup1)
-    translateX(0f, 700f)
-    start()
+// Or passing a viewgroup to animate its children
+
+val animation = androidAnimation {
+    targetChildViews(viewGroups = listOf(viewGroup1))
+    translateX(values = listOf(0f, 700f))
 }
+
+animation.start()
 ```
 
-You can also pass in multiple view since the target takes in `varargs`
+You can also pass in multiple view since the target takes in a list
 
 ```kotlin
-AndroidAnimation().apply {
-    targetViews(view1, view2, view3)
-    translateX(0f, 700f)
-    start()
+val animation = androidAnimation {
+    targetViews(views = listOf(view1, view2, view3))
+    translateX(values = listOf(0f, 700f))
 }
+
+animation.start()
 
 // Or passing multiple viewgroups to animate its childern
 
-AndroidAnimation().apply {
-    targetChildViews(viewGroup1, viewGroup2, viewGroup3)
-    translateX(0f, 700f)
-    start()
+val animation = androidAnimation {
+    targetChildViews(viewGroups = listOf(viewGroup1, viewGroup2, viewGroup3))
+    translateX(values = listOf(0f, 700f))
 }
+
+animation.start()
 ```
 
 You can also passing in multiple targets for different property animations. Doing this will make all the targeted views to play together.
 
 ```kotlin
-AndroidAnimation().apply {
-    targetViews(view1)
-    translateX(0f, 700f)
-    translateY(0f, 700f)
-    targetViews(view2)
-    translateX(0f, 700f)
-    rotate(0f, 360f)
-    start()
+val animation = androidAnimation {
+    targetViews(views = listOf(view1))
+    translate(values = listOf(0f, 700f))
+    targetViews(views = listOf(view2))
+    translateX(values = listOf(0f, 700f))
+    rotate(values = listOf(0f, 360f))
 }
+
+animation.start()
 ```
 
 ### ThenPlay
 
-The `thenPlay()` function, allows you to wait for the first target view animation to finish. See example below
+The `thenPlay()` function allows you to wait for the first target view animations to finish followed by the second. See example below
 
 
 ```kotlin
-AndroidAnimation().apply {
-    targetViews(view1)
-    translateX(0f, 700f)
-    translateY(0f, 700f)
+val animation = androidAnimation {
+    targetViews(views = listOf(view1))
+    translate(values = listOf(0f, 700f))
     thenPlay() // Waits for the first targeted views to finish their animation, then plays the next
-    targetViews(view2)
-    translateX(0f, 700f)
-    rotate(0f, 360f)
-    start()
+    targetViews(views = listOf(view2))
+    translateX(values = listOf(0f, 700f))
+    rotate(values = listOf(0f, 360f))
 }
+
+animation.start()
 ```
 
 You can also pass in a delay after the first animation has finished in milliseconds
 
 ```kotlin
-AndroidAnimation().apply {
-    targetViews(view1)
-    translateX(0f, 700f)
-    translateY(0f, 700f)
-    thenPlay(2000) // Waits for the first targeted views to finish their animation, then plays the next after 2 sec
-    targetViews(view2)
-    translateX(0f, 700f)
-    rotate(0f, 360f)
-    start()
+val animation = androidAnimation {
+    targetViews(views = listOf(view1))
+    translate(values = listOf(0f, 700f))
+    thenPlay(deley = 2000) // Waits for the first targeted views to finish their animation, then plays the next after 2 sec
+    targetViews(views = listOf(view2))
+    translateX(values = listOf(0f, 700f))
+    rotate(values = listOf(0f, 360f))
 }
+
+animation.start()
 ```
 
 ### Property Animations
 
-This library for now supports the following properties
-
-`x, y, translateX, translateY, rotate, rotateX, rotateY, scaleX, scaleY, alpha`
-
-These properties takes in `vararg values, duration, delay and easing` as parameters. See example below
+This library for now supports the following property functions
 
 ```kotlin
-AndroidAnimation().apply {
-    targetViews(view1)
-    translateX(0f, 700f, deley = 2000, easing = Easing.LINEAR)
-    translateY(0f, 700f, duration = 500)
-    start()
-}
+translate()
+translateX()
+translateY()
+x()
+y()
+xy()
+scaleX()
+scaleY()
+scale()
+rotateX()
+rotateY()
+rotate()
+alpha()
 ```
 
-**In terms of priority, the duration parameter overides the [duration](#duration) property**
+These properties takes in `list of float values, duration, delay and easing` as parameters. See example below
+
+```kotlin
+val animation = androidAnimation {
+    targetViews(views = listOf(view1))
+    translateX(listOf(0f, 700f), duration = 500, deley = 2000, easing = Easing.LINEAR)
+}
+
+animation.start()
+```
+
+**In terms of priority, the duration parameter overrides the [duration](#duration) property**
 
 
 ### Duration, Delay and Easing
 
 #### Duration
- This defines the duration for all targeted views in milliseconds
+This defines the duration for all targeted views in milliseconds
 
  ```kotlin
-AndroidAnimation().apply {
+val animation = androidAnimation {
     duration = 5000 // Animation will take 5 sec to finish
-    targetViews(view1, view2)
-    translateX(0f, 700f)
-    start()
+    targetViews(views = listOf(view1, view2))
+    translateX(values = listOf(0f, 700f))
 }
+
+animation.start()
 ```
 
-If you have mutliple views that you want to play at different durations, you can set another duration property to overide the previous one. This also applies to delay and easing. See example below
+If you have multiple views that you want to play at different durations, you can set another duration property to override the previous one. 
+This also applies to `delay` and `easing`. See example below
 
 
 ```kotlin
-AndroidAnimation().apply {
+val animation = androidAnimation {
     duration = 1000 // Below target view will have a duration of 1 sec
-    targetViews(view1)
-    translateX(0f, 700f)
-    translateY(0f, 700f)
-    duration = 3000 // Below target views will have a duration of 3 sec
-    targetViews(view2)
-    translateX(0f, 700f)
-    rotate(0f, 360f)
-    start()
+    targetViews(views = listOf(view1))
+    translate(values = listOf(0f, 700f))
+    duration = 3000 // Below the following target views will have a duration of 3 sec
+    targetViews(views = listOf(view2))
+    translateX(values = listOf(0f, 700f))
+    rotate(values = listOf(0f, 360f))
 }
+
+animation.start()
 ```
 
 #### Delay
  This defines the delay for all targeted view in milliseconds
 
 ```kotlin
-AndroidAnimation().apply {
+val animation = androidAnimation {
     delay = 3000 // The targeted views will a delay of 3 sec to to start
-    targetViews(view1, view2)
-    translateX(0f, 700f)
-    start()
+    targetViews(views = listOf(view1, view2))
+    translateX(values = listOf(0f, 700f))
 }
+
+animation.start()
 ```
 
 Delaying different targets at different times. See example below
 
 ```kotlin
-AndroidAnimation().apply {
+val animation = androidAnimation {
     delay = 1000 // Below target view will have a delay of 1 sec
-    targetViews(view1)
-    translateX(0f, 700f)
-    translateY(0f, 700f)
-    delay = 3000 // Below target views will have a delay of 3 sec
-    targetViews(view2)
-    translateX(0f, 700f)
-    rotate(0f, 360f)
-    start()
+    targetViews(views = listOf(view1))
+    translate(values = listOf(0f, 700f))
+    delay = 3000 // Below the following target views will have a delay of 3 sec
+    targetViews((view2))
+    translateX(values = listOf(0f, 700f))
+    rotate(values = listOf(0f, 360f))
 }
+
+animation.start()
 ```
 
 #### Easing
@@ -244,12 +246,13 @@ You can find all the available easings from [here](https://github.com/RamiJ3mli/
 See example below
 
 ```kotlin
-AndroidAnimation().apply {
+val animation = androidAnimation {
     easing = Easing.ELASTIC_OUT
-    targetViews(view1, view2)
-    translateX(0f, 700f)
-    start()
+    targetViews(views = listOf(view1, view2))
+    translateX(values = listOf(0f, 700f))
 }
+
+animation.start()
 ```
 
 ### Direction and Looping
@@ -259,12 +262,12 @@ AndroidAnimation().apply {
 This defines the direction of the animation. See example below
 
 ```kotlin
-AndroidAnimation().apply {
-    direction = Direction.REVERSE
-    targetViews(view1, view2)
-    translateX(0f, 700f)
-    start()
+val animation = androidAnimation {
+    targetViews(views = listOf(view1, view2), reverse = true)
+    translateX(values = listOf(0f, 700f))
 }
+
+animation.start()
 ```
 
 #### Looping
@@ -272,57 +275,94 @@ AndroidAnimation().apply {
 Defines if the animation should loop or not. See example below
 
 ```kotlin
-AndroidAnimation().apply {
+val animation = androidAnimation {
     loop = true
-    targetViews(view1, view2)
-    translateX(0f, 700f)
-    start()
+    targetViews(views = listOf(view1, view2))
+    translateX(values = listOf(0f, 700f))
 }
+
+animation.start()
 ```
 
 ### Staggering
 
-You can perform staggering by adding the `stagger` parameter to the target functions. See example below
+You can perform staggering by adding the `stagger` parameter to the target functions in milliseconds. Meaning each view will animate set amount of milliseconds after the previous one. See example below
 
 ```kotlin
-AndroidAnimation().apply {
-    targetViews(view1, view2, view3, stagger = 200)
-    translateX(0f, 700f)
-    translateY(0f, 700f)
-    start()
+val animation = androidAnimation {
+    targetViews(views = listOf(view1, view2, view3), stagger = 200)
+    translate(values = listOf(0f, 700f))
 }
+
+animation.start()
 ```
 
-You can also reverse a stagger animation, by passing the reverse parameter to true. See example below
+You can also reverse a stagger animation, by passing the `reverse` parameter to `true`. See example below
 
 ```kotlin
-AndroidAnimation().apply {
-    targetViews(view1, view2, view3, stagger = 200, reverse = true)
-    translateX(0f, 700f)
-    translateY(0f, 700f)
-    start()
+val animation = androidAnimation {
+    targetViews(views = listOf(view1, view2, view3), stagger = 200, reverse = true)
+    translateX(values = listOf(0f, 700f))
+    translateY(values = listOf(0f, 700f))
 }
+
+animation.start()
+```
+
+### Animation Actions
+
+You can perform different actions to an animations. See below
+
+```kotlin
+val animation = androidAnimation {
+    ...
+}
+
+animation.start() // Starts the animation
+animation.pause() // Pauses the animation
+animation.resume() // Resumes the animation
+animation.cancel() // Cancel the animation
+animation.end() // End the animation
+
 ```
 
 ### Callbacks
 
-As for now, the callbacks available are the `onAnimationStart` and `onAnimationEnd` callbacks
-
-See example below
+This animation library has the following callbacks available
 
 ```kotlin
-AndroidAnimation().apply {
-    targetViews(buttonAnimate1)
-    targetChildViews()
-    translateX(0f, 700f)
-    onAnimationStart {
-      // Animation has started
+onAnimationStarted { } // Called when the animation is starts
+onAnimationPaused { } // Called when the animation is paused
+onAnimationResumed { } // Called when the animation is resumed
+onAnimationCanceled { } // Called when the animation is canceled
+onAnimationEnded { } // Called when the animation ends
+```
+
+Below is how you can use it
+
+```kotlin
+val animation = androidAnimation {
+    targetViews(views = listOf(buttonAnimate1))
+    translateX(values = listOf(0f, 700f))
+    
+    onAnimationStarted { 
+        //Animation is starting
     }
-    onAnimationEnd {
-      // Animation has ended
+    onAnimationPaused { 
+        //Animation is paused
     }
-    start()
+    onAnimationResumed { 
+        //Animation is resume
+    }
+    onAnimationCanceled { 
+        //Animation is canceled
+    }
+    onAnimationEnded { 
+        //Animations has ended
+    }
 }
+
+animation.start()
 ```
 
 ## Support
